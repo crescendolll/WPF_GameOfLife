@@ -12,11 +12,12 @@
             <ColumnDefinition Width="133*"/>
         </Grid.ColumnDefinitions>
         <Canvas x:Name="cnv_Spielfeld" HorizontalAlignment="Left" Height="549" VerticalAlignment="Top" Width="798" RenderTransformOrigin="3.48,1.52" Margin="123,10,0,0" Grid.Column="1"/>
-        <Button x:Name="btn_Next" Content="Next Generation" HorizontalAlignment="Left" Height="25" Margin="14,30,0,0" VerticalAlignment="Top" Width="125" Click="btn_Next_Click" IsEnabled="False" Grid.ColumnSpan="2"/>
-        <Button x:Name="btn_Start" Content="Start" HorizontalAlignment="Left" Height="25" Margin="14,60,0,0" VerticalAlignment="Top" Width="125" Click="btn_Start_Click" IsEnabled="False" Grid.ColumnSpan="2"/>
-        <Button x:Name="btn_Stop" Content="Stop" HorizontalAlignment="Left" Height="25" Margin="14,90,0,0" VerticalAlignment="Top" Width="125" Click="btn_Stop_Click" IsEnabled="False" Grid.ColumnSpan="2"/>
-        <Button x:Name="btn_Reset" Content="Reset" HorizontalAlignment="Left" Height="25" Margin="14,120,0,0" VerticalAlignment="Top" Width="125" Click="btn_Reset_Click" IsEnabled="False" Grid.ColumnSpan="2"/>
-        <Button x:Name="btn_Create" Content="Create" HorizontalAlignment="Left" Height="25" Margin="14,240,0,0" VerticalAlignment="Top" Width="125" Click="btn_Create_Click" Grid.ColumnSpan="2"/>
-        <Label x:Name="lbl_Infotext" Content="Infotext" HorizontalAlignment="Left" Margin="14,150,0,0" VerticalAlignment="Top" Width="125" Height="92" Grid.ColumnSpan="2"/>
+        <Button x:Name="btn_Next" Content="Next Generation" HorizontalAlignment="Left" Height="25" Margin="9,30,0,0" VerticalAlignment="Top" Width="125" Click="btn_Next_Click" IsEnabled="False" Grid.ColumnSpan="2"/>
+        <Button x:Name="btn_Start" Content="Start" HorizontalAlignment="Left" Height="25" Margin="9,60,0,0" VerticalAlignment="Top" Width="125" Click="btn_Start_Click" IsEnabled="False" Grid.ColumnSpan="2"/>
+        <Button x:Name="btn_Stop" Content="Stop" HorizontalAlignment="Left" Height="25" Margin="9,90,0,0" VerticalAlignment="Top" Width="125" Click="btn_Stop_Click" IsEnabled="False" Grid.ColumnSpan="2"/>
+        <Button x:Name="btn_Reset" Content="Reset" HorizontalAlignment="Left" Height="25" Margin="9,120,0,0" VerticalAlignment="Top" Width="125" Click="btn_Reset_Click" IsEnabled="False" Grid.ColumnSpan="2"/>
+        <Button x:Name="btn_Create" Content="Create" HorizontalAlignment="Left" Height="25" Margin="9,240,0,0" VerticalAlignment="Top" Width="125" Click="btn_Create_Click" Grid.ColumnSpan="2"/>
+        <Label x:Name="lbl_Infotext" Content="Infotext" HorizontalAlignment="Left" Margin="9,150,0,0" VerticalAlignment="Top" Width="125" Height="92" Grid.ColumnSpan="2"/>
+        <Slider x:Name="trb_Delay" HorizontalAlignment="Left" Margin="9,270,0,0" Grid.ColumnSpan="2" Width="20" RenderTransformOrigin="0.955,2.861" ValueChanged="Slider_ValueChanged" VerticalAlignment="Top" Orientation="Vertical" Height="179" Minimum="0.01" Maximum="1"/>
     </Grid>
 </Window>

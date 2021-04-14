@@ -21,24 +21,25 @@ namespace WPF_GameOfLife
     /// </summary>
     public partial class MainWindow : Window
     {
+        public const int anzahlZellenHoch = 50;
+        public const int anzahlZellenBreit = 50;
+        public double generationenDauer = 0.1;
+        public Rectangle[,] zellen = new Rectangle[anzahlZellenHoch, anzahlZellenBreit];
+        public DispatcherTimer generationenTimer = new DispatcherTimer();
+
         public MainWindow()
         {
             InitializeComponent();
-            generationenTimer.Interval = TimeSpan.FromSeconds(0.01);
+            generationenTimer.Interval = TimeSpan.FromSeconds(generationenDauer);
             generationenTimer.Tick += GenerationenTimer_Tick;//(sender, e) => btn_Next_Click(sender,(RoutedEventArgs) e);
-            //generationenDauer.Start();
         }
+
+        //public double GenerationenDauer { get {return generationenDauer; } set { generationenDauer = value; generationenTimer.Interval = TimeSpan.FromSeconds(generationenDauer); } }
 
         private void GenerationenTimer_Tick(object sender, EventArgs e)
         {
             btn_Next.RaiseEvent(new RoutedEventArgs(ButtonBase.ClickEvent));
         }
-
-        public static int anzahlZellenHoch = 50;
-        public static int anzahlZellenBreit = 50;
-        public Rectangle[,] zellen = new Rectangle[anzahlZellenHoch, anzahlZellenBreit];
-        public DispatcherTimer generationenTimer = new DispatcherTimer();
-
         private void btn_Create_Click(object sender, RoutedEventArgs e)
         {
 
@@ -206,6 +207,14 @@ namespace WPF_GameOfLife
             {
                 zelle.Fill = Brushes.White;
             }
+        }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            generationenDauer = e.NewValue;
+            generationenTimer.Interval = TimeSpan.FromSeconds(generationenDauer);
+            String angabe = ((float) generationenDauer).ToString();
+            lbl_Infotext.Content = angabe + "ist die Dauer";
         }
     }
 }
