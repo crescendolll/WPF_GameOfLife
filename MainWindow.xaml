@@ -16,8 +16,13 @@
         <Button x:Name="btn_Start" Content="Start" HorizontalAlignment="Left" Height="25" Margin="9,60,0,0" VerticalAlignment="Top" Width="125" Click="btn_Start_Click" IsEnabled="False" Grid.ColumnSpan="2"/>
         <Button x:Name="btn_Stop" Content="Stop" HorizontalAlignment="Left" Height="25" Margin="9,90,0,0" VerticalAlignment="Top" Width="125" Click="btn_Stop_Click" IsEnabled="False" Grid.ColumnSpan="2"/>
         <Button x:Name="btn_Reset" Content="Reset" HorizontalAlignment="Left" Height="25" Margin="9,120,0,0" VerticalAlignment="Top" Width="125" Click="btn_Reset_Click" IsEnabled="False" Grid.ColumnSpan="2"/>
-        <Button x:Name="btn_Create" Content="Create" HorizontalAlignment="Left" Height="25" Margin="9,240,0,0" VerticalAlignment="Top" Width="125" Click="btn_Create_Click" Grid.ColumnSpan="2"/>
-        <Label x:Name="lbl_Infotext" Content="Infotext" HorizontalAlignment="Left" Margin="9,150,0,0" VerticalAlignment="Top" Width="125" Height="92" Grid.ColumnSpan="2"/>
-        <Slider x:Name="trb_Delay" HorizontalAlignment="Left" Margin="9,270,0,0" Grid.ColumnSpan="2" Width="20" RenderTransformOrigin="0.955,2.861" ValueChanged="Slider_ValueChanged" VerticalAlignment="Top" Orientation="Vertical" Height="179" Minimum="0.01" Maximum="1"/>
+        <Button x:Name="btn_Random" Content="Random" HorizontalAlignment="Left" Height="25" Margin="9,150,0,0" VerticalAlignment="Top" Width="125" Click="btn_Random_Click" IsEnabled="False" Grid.ColumnSpan="2" />
+        <Button x:Name="btn_Create" Content="Create" HorizontalAlignment="Left" Height="25" Margin="10,265,0,0" VerticalAlignment="Top" Width="125" Click="btn_Create_Click" Grid.ColumnSpan="2"/>
+        <Label x:Name="lbl_Infotext" Content="Infotext" HorizontalAlignment="Left" Margin="10,175,0,0" VerticalAlignment="Top" Width="125" Height="92" Grid.ColumnSpan="2"/>
+        <Slider x:Name="trb_Delay" HorizontalAlignment="Left" Margin="10,295,0,0" Grid.ColumnSpan="2" Width="20" RenderTransformOrigin="0.955,2.861" ValueChanged="Slider_ValueChanged" VerticalAlignment="Top" Orientation="Vertical" Height="179" Minimum="0.01" Maximum="1"/>
+        <TextBox x:Name="tbx_ZellenHoch" Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="15,295,0,0" TextWrapping="Wrap" Text="50" VerticalAlignment="Top" Width="20" TextChanged="tbx_ZellenHoch_TextChanged"/>
+        <TextBox x:Name="tbx_ZellenBreit" Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="93,295,0,0" TextWrapping="Wrap" Text="50" VerticalAlignment="Top" Width="20" RenderTransformOrigin="0.525,2.714" TextChanged="tbx_ZellenBreit_TextChanged"/>
+        <Label Content="Zeilen X Spalten" Grid.Column="1" HorizontalAlignment="Left" Margin="15,315,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.053,0.577" Width="98"/>
+
     </Grid>
 </Window>

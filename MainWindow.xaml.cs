@@ -21,20 +21,19 @@ namespace WPF_GameOfLife
     /// </summary>
     public partial class MainWindow : Window
     {
-        public const int anzahlZellenHoch = 50;
-        public const int anzahlZellenBreit = 50;
+        public static int anzahlZellenHoch;// = 50;
+        public static int anzahlZellenBreit;// = 50;
         public double generationenDauer = 0.1;
-        public Rectangle[,] zellen = new Rectangle[anzahlZellenHoch, anzahlZellenBreit];
+        public Rectangle[,] zellen;// = new Rectangle[anzahlZellenHoch, anzahlZellenBreit];
         public DispatcherTimer generationenTimer = new DispatcherTimer();
 
         public MainWindow()
         {
             InitializeComponent();
             generationenTimer.Interval = TimeSpan.FromSeconds(generationenDauer);
-            generationenTimer.Tick += GenerationenTimer_Tick;//(sender, e) => btn_Next_Click(sender,(RoutedEventArgs) e);
+            generationenTimer.Tick += GenerationenTimer_Tick;
+            lbl_Infotext.Content = "Welcome to Conways\nGame of Life. \n\nRegeln und Info:\nhttps://w.wiki/3CWR";
         }
-
-        //public double GenerationenDauer { get {return generationenDauer; } set { generationenDauer = value; generationenTimer.Interval = TimeSpan.FromSeconds(generationenDauer); } }
 
         private void GenerationenTimer_Tick(object sender, EventArgs e)
         {
@@ -43,9 +42,16 @@ namespace WPF_GameOfLife
         private void btn_Create_Click(object sender, RoutedEventArgs e)
         {
 
+            int eingabeHoch;
+            int eingabeBreit;
+            bool isParsableHoch = Int32.TryParse(tbx_ZellenHoch.Text, out eingabeHoch);
+            bool isParsableBreit = Int32.TryParse(tbx_ZellenBreit.Text, out eingabeBreit);
 
-            if (zellen[0, 0] == null)
+            if ((isParsableHoch && (eingabeHoch < 51 && eingabeHoch > 0)) && (isParsableBreit && (eingabeBreit < 51 && eingabeBreit > 0)))
             {
+                anzahlZellenHoch = eingabeHoch;
+                anzahlZellenBreit = eingabeBreit;
+                zellen = new Rectangle[anzahlZellenHoch, anzahlZellenBreit];
                 for (int i = 0; i < anzahlZellenHoch; i++)
                 {
                     for (int j = 0; j < anzahlZellenBreit; j++)
@@ -64,16 +70,18 @@ namespace WPF_GameOfLife
                         zellen[i, j] = zelle;
                     }
                 }
-                lbl_Infotext.Content = "Das Spiel wurde \nerstellt";
-            } else
-            {
-                lbl_Infotext.Content = "Das Spiel ist bereits \nerstellt";
+                lbl_Infotext.Content = "Das Spiel wurde \nerstellt.";
             }
+            else
+            {
+                lbl_Infotext.Content = "Bitte ganze Zahl \n1-50 eingeben.";
+            }                
 
             btn_Next.IsEnabled = true;
             btn_Reset.IsEnabled = true;
             btn_Start.IsEnabled = true;
             btn_Stop.IsEnabled = true;
+            btn_Random.IsEnabled = true;
 
         }
 
@@ -92,7 +100,6 @@ namespace WPF_GameOfLife
 
         private void btn_Next_Click(object sender, RoutedEventArgs e)
         {
-            //lbl_Infotext.Content = "Die nächste Generation \nwurde gespielt.";
             btn_Create.IsEnabled = false;
 
             int[,] listeLebendige = new int[anzahlZellenHoch, anzahlZellenBreit];
@@ -101,7 +108,6 @@ namespace WPF_GameOfLife
             {
                 for (int j = 0; j < anzahlZellenBreit; j++)
                 {
-                    //int lebendige = 0;
                     int above = i - 1;
                     int below = i + 1;
                     int left = j - 1;
@@ -156,9 +162,6 @@ namespace WPF_GameOfLife
                     {
                         listeLebendige[i, j]++;
                     }
-
-
-                    //listeLebendige[i, j]++;
                 }
             }
 
@@ -189,13 +192,14 @@ namespace WPF_GameOfLife
             lbl_Infotext.Content = "Das Spiel läuft \nautomatisch";
             generationenTimer.Start();
             btn_Create.IsEnabled = false;
+            btn_Random.IsEnabled = false;
         }
 
         private void btn_Stop_Click(object sender, RoutedEventArgs e)
         {
             lbl_Infotext.Content = "Das Spiel wurde \ngestoppt";
             generationenTimer.Stop();
-            btn_Create.IsEnabled = true;
+            btn_Random.IsEnabled = true;
         }
 
         private void btn_Reset_Click(object sender, RoutedEventArgs e)
@@ -203,9 +207,28 @@ namespace WPF_GameOfLife
             lbl_Infotext.Content = "Das Spiel wurde \nzurückgesetzt";
             generationenTimer.Stop();
             btn_Create.IsEnabled = true;
+            btn_Random.IsEnabled = true;
+            tbx_ZellenBreit.IsEnabled = true;
+            tbx_ZellenHoch.IsEnabled = true;
             foreach (Rectangle zelle in zellen)
             {
                 zelle.Fill = Brushes.White;
+            }
+        }
+
+        private void btn_Random_Click(object sender, RoutedEventArgs e)
+        {
+            Random rand = new Random();
+            foreach (Rectangle zelle in zellen)
+            {
+                double live = rand.NextDouble();
+                if (live <= 0.5)
+                {
+                    zelle.Fill = Brushes.Black;
+                } else
+                {
+                    zelle.Fill = Brushes.White;
+                }
             }
         }
 
@@ -215,6 +238,29 @@ namespace WPF_GameOfLife
             generationenTimer.Interval = TimeSpan.FromSeconds(generationenDauer);
             String angabe = ((float) generationenDauer).ToString();
             lbl_Infotext.Content = angabe + "ist die Dauer";
+        }
+
+        private void tbx_ZellenHoch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int number;
+
+            bool isParsable = Int32.TryParse(tbx_ZellenHoch.Text, out number);
+            if (isParsable && (number < 51 && number > 0))
+                lbl_Infotext.Content = "";
+            else
+                lbl_Infotext.Content = "Bitte ganze Zahl \n1-50 eingeben.";
+
+        }
+
+        private void tbx_ZellenBreit_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            int number;
+
+            bool isParsable = Int32.TryParse(tbx_ZellenBreit.Text, out number);
+            if (isParsable && (number < 51 && number > 0))
+                lbl_Infotext.Content = "";
+            else
+                lbl_Infotext.Content = "Bitte ganze Zahl \n1-50 eingeben.";
         }
     }
 }
