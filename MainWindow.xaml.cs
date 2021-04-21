@@ -222,7 +222,7 @@ namespace WPF_GameOfLife
             foreach (Rectangle zelle in zellen)
             {
                 double live = rand.NextDouble();
-                if (live <= 0.5)
+                if (live < 0.5)
                 {
                     zelle.Fill = Brushes.Black;
                 } else
